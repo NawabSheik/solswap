@@ -8,13 +8,8 @@ import { useConnection,useWallet } from "@solana/wallet-adapter-react";
 
 
 
-export default function page() {
-    const [isClient, setIsClient] = useState(false)
- 
-        useEffect(() => {
-        setIsClient(false);
-        }, [])
-
+export default function Page() {
+  
     const {connection}=useConnection();
     const wallet=useWallet();
 

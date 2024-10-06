@@ -12,9 +12,9 @@ import '@solana/wallet-adapter-react-ui/styles.css';
 
 
 
-const page= () =>{
+const Page= () =>{
   return (
-<div style={{width: "100vw"}}>
+    <div style={{width: "100vw"}}>
       <ConnectionProvider endpoint={"https://api.mainnet-beta.solana.com"}>
         <WalletProvider wallets={[]} autoConnect>
             <WalletModalProvider>
@@ -35,4 +35,4 @@ const page= () =>{
   )
 }
 
-export default page
+export default Page
