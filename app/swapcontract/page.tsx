@@ -1,8 +1,8 @@
 "use client";
 
-import {VersionedTransaction,PublicKey} from "@solana/web3.js";
+import {VersionedTransaction} from "@solana/web3.js";
 import axios from "axios";
-import React ,{useEffect,useState} from "react";
+import React ,{useState} from "react";
 import { useConnection,useWallet } from "@solana/wallet-adapter-react";
 
 
@@ -60,7 +60,7 @@ export default function Page() {
             );
             console.log("swapTransaction");
             const swapTransactionBuf = Buffer.from(swapTransaction, 'base64');
-            var transaction = VersionedTransaction.deserialize(swapTransactionBuf);
+            const transaction = VersionedTransaction.deserialize(swapTransactionBuf);
             console.log('Deserialized transaction: ',transaction);
 
             const signedTransaction=await wallet.signTransaction(transaction);
