@@ -9,7 +9,7 @@ import SwapContract from "@/app/swapcontract/page";
 import {ConnectionProvider, WalletProvider} from "@solana/wallet-adapter-react";
 import { WalletModalProvider,WalletDisconnectButton,WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import '@solana/wallet-adapter-react-ui/styles.css';
-import dynamic from 'next/dynamic';
+
 
 
 const page= () =>{

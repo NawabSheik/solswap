@@ -1,13 +1,9 @@
 "use client";
 
-import {Connection, Keypair,VersionedTransaction,PublicKey} from "@solana/web3.js";
+import {VersionedTransaction,PublicKey} from "@solana/web3.js";
 import axios from "axios";
 import React ,{useEffect,useState} from "react";
 import { useConnection,useWallet } from "@solana/wallet-adapter-react";
-import { Wallet } from "@project-serum/anchor";
-import bs58 from "bs58";
-import config from "dotenv";
-
 
 
 
