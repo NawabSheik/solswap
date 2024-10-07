@@ -3,7 +3,7 @@ import React from 'react'
 import Appbar from "@/components/Appbar/page";
 import SwapContract from "@/app/swapcontract/page";
 import {ConnectionProvider, WalletProvider} from "@solana/wallet-adapter-react";
-import { WalletModalProvider,WalletDisconnectButton,WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { WalletModalProvider} from '@solana/wallet-adapter-react-ui';
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 const Page= () =>{

@@ -17,7 +17,6 @@ export default function Page() {
     const [inputMint,setInputMint]=useState('');
     const [outputMint,setOutputMint]=useState('');
     const [amount,setAmount]=useState('');
-    
     const [response,setResponse]=useState(null);
     const [outAmount, setOutAmount] = useState('GET QUOTE');
 
@@ -40,6 +39,7 @@ export default function Page() {
        
         const res=await axios.get(`https://quote-api.jup.ag/v6/quote?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=300`)
         setResponse(res.data);
+        console.log(response);
         setOutAmount(res.data.outAmount);
        
         const quoteResponse=res.data;
@@ -99,7 +99,7 @@ export default function Page() {
             <form onSubmit={getQuote}>
                 <div className="styled-div">
                     <label>
-                       <h2 className="text-lg">You're Selling</h2>
+                       <h2 className="text-lg">You&apos;re Selling</h2>
                         <select value={inputMint} onChange={(e) => setInputMint(e.target.value)} required className="selection">
                           
                             {inputMintOptions.map((option)   => (
@@ -121,7 +121,7 @@ export default function Page() {
                 </div>
                 <div className="styled-div">
                     <label>
-                       <h2 className="text-lg">You're Buying</h2>
+                       <h2 className="text-lg">You&apos;re Buying</h2>
                        <select value={outputMint} onChange={(e) => setOutputMint(e.target.value)} required className="selection">
                            
                            {outputMintOptions.map((option) => (
