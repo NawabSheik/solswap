@@ -16,7 +16,7 @@ export default function Page() {
 
     const [inputMint,setInputMint]=useState('');
     const [outputMint,setOutputMint]=useState('');
-    const [amount,setAmount]=useState('');
+    const [amount,setAmount]=useState('0');
     const [response,setResponse]=useState(null);
     const [outAmount, setOutAmount] = useState('GET QUOTE');
 
@@ -92,7 +92,7 @@ export default function Page() {
     }
     return (
         <div className="swap-contract">
-
+            <div className="swap-div">
             <h1 className="text-4xl font-bold mb-2">Flip the Coin</h1>
             
             <div >
@@ -157,6 +157,7 @@ export default function Page() {
                 </div> */}
             </form>
             <button onClick={swap} className='swap-btn'>Swap Token</button>
+        </div>
         </div>
         </div>
     )
