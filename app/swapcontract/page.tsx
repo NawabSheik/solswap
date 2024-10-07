@@ -8,6 +8,7 @@ import { useConnection,useWallet } from "@solana/wallet-adapter-react";
 
 
 
+
 export default function Page() {
   
     const {connection}=useConnection();
@@ -16,19 +17,20 @@ export default function Page() {
     const [inputMint,setInputMint]=useState('');
     const [outputMint,setOutputMint]=useState('');
     const [amount,setAmount]=useState('');
-    const[slippageBps, setSlippageBps]=useState('');
+    
     const [response,setResponse]=useState(null);
+    const [outAmount, setOutAmount] = useState('GET QUOTE');
 
     const inputMintOptions=[
-        {value:'So11111111111111111111111111111111111111112',label:'Solana'},
-        {value:'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',label:'Bonk'},
+        {value:'So11111111111111111111111111111111111111112',label:'SOL'},
+        {value:'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',label:'BONK'},
         {value:'7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs',label:'Ether'},
 
     ];
 
     const outputMintOptions=[
-        {value:'So11111111111111111111111111111111111111112',label:'Solana'},
-        {value:'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',label:'Bonk'},
+        {value:'So11111111111111111111111111111111111111112',label:'SOL'},
+        {value:'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',label:'BONK'},
         {value:'7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs',label:'Ether'},
 
     ];
@@ -36,8 +38,9 @@ export default function Page() {
     async function getQuote(e){
         e.preventDefault();
        
-        const res=await axios.get(`https://quote-api.jup.ag/v6/quote?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=${slippageBps}`)
+        const res=await axios.get(`https://quote-api.jup.ag/v6/quote?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=300`)
         setResponse(res.data);
+        setOutAmount(res.data.outAmount);
        
         const quoteResponse=res.data;
         console.log(quoteResponse);
@@ -88,66 +91,73 @@ export default function Page() {
           
     }
     return (
-        <div>
-            <h1>Swap Contract</h1>
+        <div className="swap-contract">
+
+            <h1 className="text-4xl font-bold mb-2">Flip the Coin</h1>
+            
+            <div >
             <form onSubmit={getQuote}>
-                <div>
+                <div className="styled-div">
                     <label>
-                        Input Mint:
-                        <select value={inputMint} onChange={(e) => setInputMint(e.target.value)} required>
-                            <option value="" disabled>Select Input Mint</option>
-                            {inputMintOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
+                       <h2 className="text-lg">You're Selling</h2>
+                        <select value={inputMint} onChange={(e) => setInputMint(e.target.value)} required className="selection">
+                          
+                            {inputMintOptions.map((option)   => (
+                                <option key={option.value} className="text-lg bg-black token-options" value={option.value}>
                                     {option.label}
                                 </option>
                             ))}
                         </select>  
                     </label>
-                </div>
-                <div>
                     <label>
-                        Output Mint:
-                        <select value={outputMint} onChange={(e) => setOutputMint(e.target.value)} required>
-                            <option value="" disabled>Select Output Mint</option>
-                            {outputMintOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Amount:
+                       
                         <input
-                            type="number"
                             value={amount}
+                            className="input-section"
                             onChange={(e) => setAmount(e.target.value)}
                             required
                         />
                     </label>
                 </div>
-                <div>
+                <div className="styled-div">
                     <label>
-                        Slippage Limit:
+                       <h2 className="text-lg">You're Buying</h2>
+                       <select value={outputMint} onChange={(e) => setOutputMint(e.target.value)} required className="selection">
+                           
+                           {outputMintOptions.map((option) => (
+                               <option key={option.value} value={option.value} className="text-lg bg-black token-options">
+                                   {option.label}
+                               </option>
+                           ))}
+                       </select>
+                    </label>
+
+                    <label>
+                    <button type="submit">
+                     <h2 className="input-section">{outAmount}</h2>
+                     </button>
+                   </label>
+                </div>
+                <div>
+                </div>
+                {/* <div className="styled-div">
+                    <label>
+
+                            <h2 className="text-lg">Slippage Limit</h2>
                         <input
                             type="number"
                             value={slippageBps}
                             onChange={(e) => setSlippageBps(e.target.value)}
                             required
+                            className="input-section"
+                            
                         />
                     </label>
                     <button type="submit">Get Quote</button>
-                </div>
+                </div> */}
             </form>
-            {response && (
-                <div>
-                    <h2>Response:</h2>
-                    <pre>{JSON.stringify(response, null, 2)}</pre>
-                </div>
-            )}
-            <button onClick={swap} className='btn'>Swap Token</button>
+            <button onClick={swap} className='swap-btn'>Swap Token</button>
+        </div>
         </div>
     )
 }
